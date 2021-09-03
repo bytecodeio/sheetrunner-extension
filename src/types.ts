@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-export interface UpdateDashboardUiProps {
+export interface MainUiProps {
   route: string
   routeState?: any
 }

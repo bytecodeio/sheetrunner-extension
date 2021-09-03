@@ -36,7 +36,7 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist',
-    filename: 'pushchangestodashboard.js',
+    filename: 'bundle.js',
     publicPath: "http://localhost:8080/"
   },
   mode: 'development',

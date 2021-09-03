@@ -6,21 +6,6 @@ export const ContentContainer = styled(Flex as any)`
   height: 100%;
 `;
 
-export const SaveAndConfigureButton = styled(Button as any)`
-  background: rgb(150, 202, 63);
-  width: 10%;
-  min-width: 200px;
-  border: none;
-
-  &:hover,
-  &:focus {
-      background-color: rgb(150, 202, 63);
-      background: rgb(150, 202, 63);
-      outline: 0;
-      box-shadow: none;
-  }
-`;
-
 export const BoxWithDivider = styled(Box as any)`
     margin: none;
 `;
@@ -46,32 +31,11 @@ export const TransparentButton = styled(Button as any)`
     }
 `;
 
-export const SavedSetLink = styled.a`
-    color: rgb(44, 124, 225);
-    text-decoration: underline;
-`;
-
 
 export const Container = styled(Box as any)`
     height: 100%;
     width: 100%;
     background-color: rgba(1, 1, 1, 0);
-`;
-
-export const SelectButtonItem = styled(ButtonItem as any)`
-    &:hover,
-    &:focus,
-    &:active,
-    &[aria-pressed="true"] {
-        background-color: rgb(227, 239, 255);
-        color: rgb(44, 124, 225);
-        outline: 0;
-        box-shadow: none;
-    }
-`;
-
-export const SelectCheckboxGroup = styled(CheckboxGroup as any)`
-    color: rgb(44, 124, 225);
 `;
 
 export const EmbedContainer = styled.div`

@@ -23,7 +23,7 @@
  */
 
 import React, { useState } from 'react'
-import { UpdateDashboardUi } from './UpdateDashboardUi'
+import { MainUI } from './MainUI'
 import { ExtensionProvider } from '@looker/extension-sdk-react'
 import { hot } from 'react-hot-loader/root'
 
@@ -38,7 +38,7 @@ export const App: React.FC<{}> = hot(() => {
 
   return (
     <ExtensionProvider onRouteChange={onRouteChange}>
-        <UpdateDashboardUi route={route} routeState={routeState} />
+        <MainUI route={route} routeState={routeState} />
     </ExtensionProvider>
   )
 })

@@ -1,8 +1,8 @@
 {
-  "name": "update-dashboard-ui",
+  "name": "auth0-test",
   "version": "0.0.1",
-  "description": "Harvest Extension",
-  "main": "dist/pushchangestodashboard.js",
+  "description": "Auth0 Test Extension",
+  "main": "dist/bundle.js",
   "scripts": {
     "clean": "rm -rf dist",
     "lint": "run-p -c lint:*",

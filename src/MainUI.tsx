@@ -32,7 +32,7 @@ import {
   ExtensionContextData,
 } from '@looker/extension-sdk-react'
 import { Home } from './pages/Home'
-import { UpdateDashboardUiProps } from './types'
+import { MainUiProps } from './types'
 
 export enum ROUTES {
   HOME_ROUTE = '/',
@@ -41,7 +41,7 @@ export enum ROUTES {
   RESULTS_ROUTE = '/results',
 };
 
-export const UpdateDashboardUi: React.FC<UpdateDashboardUiProps> = ({
+export const MainUI: React.FC<MainUiProps> = ({
   route,
   routeState,
 }) => {
@@ -81,9 +81,6 @@ export const UpdateDashboardUi: React.FC<UpdateDashboardUiProps> = ({
   return (
     <ComponentsProvider>
       <Flex flexDirection='column' justifyContent='space-between' alignItems='stretch' alignContent='stretch' height='100%'>
-        <Box pt='medium' pb='medium' pl='small' borderBottom='solid 2px rgb(231, 231, 231)'>
-          <Heading as='h1'>Push Updates to Customer Dashboard</Heading>
-        </Box>
         <ContentContainer flex={1}>
           <Switch>
             <Route path={ROUTES.HOME_ROUTE}>
