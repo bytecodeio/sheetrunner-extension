@@ -1,4 +1,4 @@
-# Auth0 Test Extension
+# SheetRunner Extension
 
 
 It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/), the [React Extension SDK](https://github.com/looker-open-source/extension-sdk-react) for interacting with Looker, and [Webpack](https://webpack.js.org/) for building.
@@ -45,8 +45,8 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
    You can either drag & upload this file into your Looker project, or create a `manifest.lkml` with the same content. Change the `id`, `label`, or `url` as needed.
 
    ```
-   application: auth0_test {
-    label: "Autho Test"
+   application: sheetrunner {
+    label: "SheetRunner"
     # file: "./bundle.js"
     url: "http://localhost:8080/bundle.js"
     entitlements: {
@@ -73,8 +73,8 @@ The process above requires your local development server to be running to load t
 2. Drag and drop the generated `dist/bundle.js` file into the Looker project interface
 3. Modify your `manifest.lkml` to use `file` instead of `url`:
    ```
-   application: auth0_test {
-     label: "Autho Test"
+   application: sheetrunner {
+     label: "SheerRunner"
      file: "bundle.js"
       entitlements: {
       local_storage: yes
