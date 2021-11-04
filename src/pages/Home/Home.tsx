@@ -7,7 +7,7 @@ export const Home: React.FC<HomeProps> = ({ }) => {
 
   return (
         <ContentContainer flexDirection='row' justifyContent='space-between'>
-            <EmbedDashboard id="63a7P06MWmCUfx5oaOct05"/>
+            <EmbedDashboard id="Xeq8pEZd7yNSbF9O003r7G"/>
         </ContentContainer>
   )
 };
