@@ -50,9 +50,14 @@ async function createTable(sql:string, tableName:string, headers: string[], scra
     return sql
 }
 
-function insert(tableName: string, sql: string, rows, columns) {
+function insert(tableName: string, sql: string, rows: string[], columns:string[]) {
     const start = `INSERT INTO ${tableName} ( ${columns.map(getSQLColumnName).join(', ')} )  VALUES `;
     sql += start;
+    rows = rows.filter(
+        (x)=> {
+           return x.length > columns.length +1
+        })
+    console.log(57)
     rows.map((row, i) => {
         const valuesArray: string[] = row.split(",")
    
@@ -62,17 +67,21 @@ function insert(tableName: string, sql: string, rows, columns) {
             return toPrint;
 
         });
-        const values = `(${newValues.join(', ')})${i !== rows.length - 1 ? ',' : ''} `;
-        sql +=values;
+        // Avoid empty line inserts
+       
+            const values = `(${newValues.join(', ')})${i !== rows.length - 1 ? ',' : ''} `;
+            sql +=values;
+        
     });
 
     sql += `;`;
+    // sql.replace(',,',',').replace(',;',';').replace(', ;',';');
    return sql
 }
 
 async function insertions(sql, tableName, rowsArray, columns) {
     while (rowsArray.length) {
-        const thousand = rowsArray.splice(0, 1000);
+        const thousand: string[] = rowsArray.splice(0, 1000);
         sql = insert(tableName, sql, thousand, columns);
     }
     return sql
