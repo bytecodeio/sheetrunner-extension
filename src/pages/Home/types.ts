@@ -26,5 +26,5 @@ import { Form } from '@looker/components';
 import React from 'react'
 
 export interface HomeProps {
-    formRef: any;
+    sdk: any;
 }

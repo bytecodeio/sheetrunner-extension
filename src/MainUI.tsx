@@ -50,7 +50,7 @@ export const MainUI: React.FC<MainUiProps> = ({
   const currentSetFormRef = useRef(null);
   const setFormRef = useRef(null);
   const codeLookupFormRef = useRef(null);
-  const { extensionSDK } = extensionContext;
+  const { extensionSDK, core40SDK } = extensionContext;
   const [canPersistContextData, setCanPersistContextData] = useState<boolean>(
     false
   );
@@ -84,7 +84,7 @@ export const MainUI: React.FC<MainUiProps> = ({
         <ContentContainer flex={1}>
           <Switch>
             <Route path={ROUTES.HOME_ROUTE}>
-              <Home formRef={newFeasibilityFormRef} />
+              <Home sdk={core40SDK} />
             </Route>
           </Switch>
         </ContentContainer>

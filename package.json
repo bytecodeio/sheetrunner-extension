@@ -36,6 +36,7 @@
     "axios": "^0.24.0",
     "babel-loader": "^8.0.6",
     "bluebird": "^3.5.1",
+    "buffer": "",
     "csvtojson": "2.0.10",
     "dotenv": "^8.2.0",
     "is-utf8": "0.2.1",

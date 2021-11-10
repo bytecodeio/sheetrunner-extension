@@ -3,13 +3,19 @@ import { HomeProps } from './types'
 import { ContentContainer } from '../../styles';
 import { Upload } from '../../utils/upload';
 import { GenerateSQL } from '../../utils/generate_sql';
+import { ExecuteSQL } from '../../utils/execute_sql';
 
 // import { EmbedDashboard } from '../../components/EmbedDashboard';
 
-export const Home: React.FC<HomeProps> = ({ }) => {
+export const Home: React.FC<HomeProps> = ({sdk}) => {
+  
   let [inputfile, updatefile] = useState("")
   let [sql, updateSQL] = useState("")
+  let [result, updateResult] = useState("")
 
+  const connection_name =  "bytecode_looker_bigquery";
+
+  const connection_response = sdk.ok(sdk.all_connections())
 
   return (
         <ContentContainer flexDirection='row' justifyContent='space-between'>
@@ -19,7 +25,9 @@ export const Home: React.FC<HomeProps> = ({ }) => {
             <div id="buttons" >
               <input type="file" id="fileUpload" />
               <input type="button" id="upload" value="Upload" onClick={(e) => Upload(updatefile)} />
-              <input type="button" id="upload" value="Generate SQL" onClick={(e) => GenerateSQL(inputfile, updateSQL)} />
+              <input type="button" id="parse" value="Generate SQL" onClick={(e) => GenerateSQL(inputfile, updateSQL, sdk, connection_name)} />
+              <input type="button" id="upload" value="Execute SQL" onClick={(e) => ExecuteSQL(sql, updateResult, sdk, connection_name)} />
+              
             </div>
             <hr />
             <div id="dvCSV">
@@ -28,7 +36,9 @@ export const Home: React.FC<HomeProps> = ({ }) => {
             <div id="sql">
               {sql}
             </div>
-
+            <div id="results">
+              {result}
+            </div>
         </ContentContainer>
   )
 };

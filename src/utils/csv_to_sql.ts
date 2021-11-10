@@ -1,4 +1,4 @@
-
+import { Looker40SDK, IDBConnection } from '@looker/sdk'
 const csv = require('csvtojson');
 
 function getSQLColumnName(csvColumnName) {
@@ -35,9 +35,9 @@ function getSafeStringValue (str: string):string {
     });
 }
 
-async function createTable(sql:string, tableName:string, headers: string[]) {
+async function createTable(sql:string, tableName:string, headers: string[], scratch_schema: string) {
 
-    const start = `CREATE TABLE ${tableName} (\n`;
+    const start = `CREATE TABLE ${scratch_schema}.${tableName} (\n`;
     sql += start
     headers.map((header, index) => {
         const name: string = getSQLColumnName(header);
@@ -77,15 +77,19 @@ async function insertions(sql, tableName, rowsArray, columns) {
     return sql
 }
 
-export async function writeMigration(inputData: string, tableName: string) {
+export async function writeMigration(inputData: string, tableName: string, sdk: Looker40SDK, connection_name) {
    
+    let scratch_schema_response = await sdk.ok(sdk.connection(connection_name))
+    console.log(scratch_schema_response)
+    let scratch_schema = scratch_schema_response.tmp_db_name
+
     const data: string = inputData
 
     const rowsArray: string[] = data.split("\n")
     
     const columns: string[] = rowsArray[0].split(",");
     let sql: string = "";
-    sql = await createTable(sql, tableName, columns);
+    sql = await createTable(sql, tableName, columns, scratch_schema);
     sql = await insertions(sql, tableName, rowsArray, columns);
     console.log(sql)
     return sql
