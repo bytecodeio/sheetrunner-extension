@@ -6,6 +6,7 @@ function getSQLColumnName(csvColumnName) {
         .replace(/ /g, '')
         .replace('\\', '')
         .replace('/', '')
+        .replace('\r', '')
         .replace('-', '');
 }
 
@@ -22,9 +23,9 @@ function getSafeStringValue (str: string):string {
             case "\x1a":
                 return "\\z";
             case "\n":
-                return "\\n";
+                return "";
             case "\r":
-                return "\\r";
+                return "";
             case "'":
                 return "'"+char;
             case "\"":
@@ -37,20 +38,20 @@ function getSafeStringValue (str: string):string {
 
 async function createTable(sql:string, tableName:string, headers: string[], scratch_schema: string) {
 
-    const start = `CREATE TABLE ${scratch_schema}.${tableName} (\n`;
+    const start = `CREATE OR REPLACE TABLE ${scratch_schema}.${tableName} ( `;
     sql += start
     headers.map((header, index) => {
         const name: string = getSQLColumnName(header);
-        const type: string = 'varchar';
-        const line: string = `${name} ${type}${index !== headers.length - 1 ? ',' : ''}\n`;
+        const type: string = 'string';
+        const line: string = `${name} ${type}${index !== headers.length - 1 ? ',' : ''} `;
         sql +=line;
     });
-    sql +=  ');\n';
+    sql +=  ');';
     return sql
 }
 
 function insert(tableName: string, sql: string, rows, columns) {
-    const start = `INSERT INTO ${tableName} ( ${columns.map(getSQLColumnName).join(', ')} )\n VALUES\n`;
+    const start = `INSERT INTO ${tableName} ( ${columns.map(getSQLColumnName).join(', ')} )  VALUES `;
     sql += start;
     rows.map((row, i) => {
         const valuesArray: string[] = row.split(",")
@@ -61,7 +62,7 @@ function insert(tableName: string, sql: string, rows, columns) {
             return toPrint;
 
         });
-        const values = `(${newValues.join(', ')})${i !== rows.length - 1 ? ',' : ''}\n`;
+        const values = `(${newValues.join(', ')})${i !== rows.length - 1 ? ',' : ''} `;
         sql +=values;
     });
 

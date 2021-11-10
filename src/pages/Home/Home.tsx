@@ -12,8 +12,8 @@ export const Home: React.FC<HomeProps> = ({sdk}) => {
   let [inputfile, updatefile] = useState("")
   let [sql, updateSQL] = useState("")
   let [result, updateResult] = useState("")
-
-  const connection_name =  "bytecode_looker_bigquery";
+  let [connection_name, setConnectionName] = useState("")
+  setConnectionName("bytecode_looker_bigquery");
 
   const connection_response = sdk.ok(sdk.all_connections())
 

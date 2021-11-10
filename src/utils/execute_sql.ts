@@ -17,7 +17,7 @@ export async function ExecuteSQL(sql: string,updateResults: Function, sdk:Looker
       queryCreationResponse.slug,
      "json"
     ))
-    console.log(response)
+    console.log(JSON.stringify(response))
     updateResults(response)
   })
 
