@@ -87,8 +87,9 @@ export async function writeMigration(inputData: string, tableName: string, sdk: 
     const data: string = inputData
 
     const rowsArray: string[] = data.split("\n")
-    
     const columns: string[] = rowsArray[0].split(",");
+    rowsArray.shift()
+
     let sql: string = "";
     sql = await createTable(sql, tableName, columns, scratch_schema);
     sql = await insertions(sql, tableName, rowsArray, columns);

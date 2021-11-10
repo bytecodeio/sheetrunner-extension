@@ -2,7 +2,7 @@ import { ISqlQueryCreate, Looker40SDK } from '@looker/sdk'
 
 export async function ExecuteSQL(sql: string,updateResults: Function, sdk:Looker40SDK, connection_name) {
 
-  let queries = sql.split(";")
+  let queries = sql.split(";").filter(x=>x.length>0)
 
   queries.forEach(async (statement) => {
     let queryObject: ISqlQueryCreate = {
@@ -15,9 +15,9 @@ export async function ExecuteSQL(sql: string,updateResults: Function, sdk:Looker
 
     let response = await sdk.ok(sdk.run_sql_query(
       queryCreationResponse.slug,
-     "json"
+     "txt"
     ))
-    console.log(JSON.stringify(response))
+    console.log(response)
     updateResults(response)
   })
 

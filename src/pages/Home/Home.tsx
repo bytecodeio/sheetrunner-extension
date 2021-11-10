@@ -5,15 +5,12 @@ import { Upload } from '../../utils/upload';
 import { GenerateSQL } from '../../utils/generate_sql';
 import { ExecuteSQL } from '../../utils/execute_sql';
 
-// import { EmbedDashboard } from '../../components/EmbedDashboard';
-
 export const Home: React.FC<HomeProps> = ({sdk}) => {
   
   let [inputfile, updatefile] = useState("")
   let [sql, updateSQL] = useState("")
   let [result, updateResult] = useState("")
-  let [connection_name, setConnectionName] = useState("")
-  setConnectionName("bytecode_looker_bigquery");
+  let [connection_name, setConnectionName] = useState("bytecode_looker_bigquery")
 
   const connection_response = sdk.ok(sdk.all_connections())
 
