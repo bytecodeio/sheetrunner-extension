@@ -7,7 +7,8 @@ import { GenerateSQL } from '../../utils/generate_sql';
 // import { EmbedDashboard } from '../../components/EmbedDashboard';
 
 export const Home: React.FC<HomeProps> = ({ }) => {
-  let [inputfile, updatefile] = useState(null)
+  let [inputfile, updatefile] = useState("")
+  let [sql, updateSQL] = useState("")
 
 
   return (
@@ -15,11 +16,17 @@ export const Home: React.FC<HomeProps> = ({ }) => {
 
             <img src="https://storage.googleapis.com/bytecode-hackathon-2021/SheetRunner_final.png" height="150px"/>
 
-            <input type="file" id="fileUpload" />
-            <input type="button" id="upload" value="Upload" onClick={(e) => Upload(updatefile)} />
-            <input type="button" id="upload" value="Generate SQL" onClick={(e) => GenerateSQL(inputfile)} />
+            <div id="buttons" >
+              <input type="file" id="fileUpload" />
+              <input type="button" id="upload" value="Upload" onClick={(e) => Upload(updatefile)} />
+              <input type="button" id="upload" value="Generate SQL" onClick={(e) => GenerateSQL(inputfile, updateSQL)} />
+            </div>
             <hr />
             <div id="dvCSV">
+            </div>
+            <hr />
+            <div id="sql">
+              {sql}
             </div>
 
         </ContentContainer>
