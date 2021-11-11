@@ -4,7 +4,7 @@ import { ContentContainer } from '../../styles';
 import { Upload } from '../../utils/upload';
 import { GenerateSQL } from '../../utils/generate_sql';
 import { ExecuteSQL } from '../../utils/execute_sql';
-import { Select, Space, SpaceVertical, Button, FadeIn } from '@looker/components'
+import { Select, Space, SpaceVertical, Button, FadeIn, Grid } from '@looker/components'
 import { IDBConnection } from '@looker/sdk';
 
 export const Home: React.FC<HomeProps> = ({ sdk }) => {
@@ -46,10 +46,23 @@ export const Home: React.FC<HomeProps> = ({ sdk }) => {
   const toggleNav = () => setShowNav(!showNav)
 
   return (
-    <Space>
+    <>
+
+    <span>
+    <img src="https://storage.googleapis.com/bytecode-hackathon-2021/SheetRunner_final.png" height="100px" />
+    </span>
+
+
+    <Space m="20px" p="10px">
+
+    <Grid>
       {showNav ?
       <div className="wrapper">
+
+
         <SpaceVertical id="sidebar">
+
+
 
           <label htmlFor="model">Choose a connection:</label>
 
@@ -63,20 +76,28 @@ export const Home: React.FC<HomeProps> = ({ sdk }) => {
 
         </SpaceVertical>
       </div>
-      : 
+      :
       <FadeIn>
         <Button onClick={toggleNav}>Show</Button>
       </FadeIn>
       }
+    </Grid>
 
-      <img src="https://storage.googleapis.com/bytecode-hackathon-2021/SheetRunner_final.png" height="150px" />
 
+
+    <Grid>
       <div id="buttons" >
 
+
+
+       <SpaceVertical id="uploadfunctions">
+
         <input type="file" id="fileUpload" />
-        <input type="button" id="upload" value="Upload" onClick={(e) => {Upload(updatefile); setMessage("Uploading File...")}} />
+        <Button type="button" id="upload" value="Upload" onClick={(e) => {Upload(updatefile); setMessage("Uploading File...")}}>Upload</Button>
         {/* <input type="button" id="parse" value="Generate SQL" onClick={(e) => GenerateSQL(inputfile, updateSQL, sdk, connection_name)} />
         <input type="button" id="upload" value="Execute SQL" onClick={(e) => ExecuteSQL(sql, updateResult, sdk, connection_name)} /> */}
+
+       </SpaceVertical>
 
       </div>
       {/* <hr />
@@ -89,6 +110,8 @@ export const Home: React.FC<HomeProps> = ({ sdk }) => {
       <div id="results">
         {result}
       </div> */}
-    </Space>
+    </Grid>
+   </Space>
+   </>
   )
 };
