@@ -21,8 +21,10 @@ export const createExploreLink: Function = async (tableName: string, updateMessa
           ))
 
         let exploreLink: string = `/explore/sql__${slug}/sql_runner_query?fields=sql_runner_query.detail*&toggle=vis`
+        
         extensionSDK.openBrowserWindow(exploreLink,'_blank');
-        updateMessage("Check out the data in the next browser tab ^")
+        
+        updateMessage(`Check out the data in the next browser tab, or navigate to: ${exploreLink}`)
     } catch (error) {
         updateMessage(`There was an error creating the sql explore link: ${error}`)
       }

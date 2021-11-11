@@ -1,11 +1,11 @@
-function camelize(str) {
+function sanitize(str) {
     return str.replace(/[^a-zA-Z0-9]/g, '')  ;
   }
 
 export function Upload(updatefile, updateTableName) {
     var fileUpload: HTMLFormElement = document.getElementById("fileUpload") as HTMLFormElement;
     const tableName = fileUpload.files[0].name
-    const cleanName = camelize(tableName)
+    const cleanName = sanitize(tableName)
     updateTableName(cleanName)
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
     if (regex.test(fileUpload.value.toLowerCase())) {
