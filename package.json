@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
-    "@looker/components": "^0.9.25",
+    "@looker/components": "^0.9.30",
     "@looker/embed-sdk": "^1.6.0",
     "@looker/extension-sdk": "21.20.0",
     "@looker/extension-sdk-react": "21.20.0",
