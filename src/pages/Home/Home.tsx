@@ -70,7 +70,7 @@ export const Home: React.FC<HomeProps> = ({ sdk, extensionSDK }) => {
 
     <Space m="20px" p="10px" evenly>
 
-    
+
       {showNav ?
       <div className="wrapper">
 
@@ -104,8 +104,8 @@ export const Home: React.FC<HomeProps> = ({ sdk, extensionSDK }) => {
 
        <SpaceVertical id="uploadfunctions">
 
-        <input type="file" id="fileUpload" styles={{color:"purple"}} />
-        <Button type="button" id="upload" value="Upload" onClick={(e) => {Upload(updatefile); setMessage("Uploading File...")}}>Upload</Button>
+        <input type="file" id="fileUpload" />
+        <Button type="button" id="upload" value="Upload" onClick={(e) => {Upload(updatefile, setTableName); setMessage("Uploading File...")}}>Upload</Button>
         {/* <input type="button" id="parse" value="Generate SQL" onClick={(e) => GenerateSQL(inputfile, updateSQL, sdk, connection_name)} />
         <input type="button" id="upload" value="Execute SQL" onClick={(e) => ExecuteSQL(sql, updateResult, sdk, connection_name)} /> */}
 

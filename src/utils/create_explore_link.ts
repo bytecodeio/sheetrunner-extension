@@ -12,7 +12,15 @@ export const createExploreLink: Function = async (tableName: string, updateMessa
         } 
         let queryCreationResponse = await sdk.ok(sdk.create_sql_query(queryObject))
         let slug: string = queryCreationResponse.slug
-        let exploreLink: string = `/explore/sql__${slug}/sql_runner_query?fields=sql_runner_query.detail*`
+        
+        updateMessage("Priming the Explore Experience")
+        // Run it to 'prime' the explore
+        await sdk.ok(sdk.run_sql_query(
+            queryCreationResponse.slug,
+            "txt"
+          ))
+
+        let exploreLink: string = `/explore/sql__${slug}/sql_runner_query?fields=sql_runner_query.detail*&toggle=vis`
         extensionSDK.openBrowserWindow(exploreLink,'_blank');
         updateMessage("Check out the data in the next browser tab ^")
     } catch (error) {
