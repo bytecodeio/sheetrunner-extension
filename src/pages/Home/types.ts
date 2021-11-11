@@ -23,8 +23,11 @@
  */
 
 import { Form } from '@looker/components';
+import { ExtensionSDK } from '@looker/extension-sdk';
+import { LookerExtensionSDK } from '@looker/sdk';
 import React from 'react'
 
 export interface HomeProps {
     sdk: any;
+    extensionSDK: ExtensionSDK;
 }

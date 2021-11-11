@@ -1,8 +1,10 @@
 // https://looker.bytecode.io/explore/sql__nvf4tf8jd4jjj5/sql_runner_query?fields=sql_runner_query.detail*
 
-import { ISqlQueryCreate, Looker40SDK } from "@looker/sdk"
+import { ExtensionSDK } from "@looker/extension-sdk"
+import { ISqlQueryCreate, Looker40SDK, LookerExtensionSDK } from "@looker/sdk"
 
-export const createExploreLink: Function = async (tableName: string, updateMessage: Function, connection_name: string, sdk: Looker40SDK ) => {
+export const createExploreLink: Function = async (tableName: string, updateMessage: Function, connection_name: string, sdk: Looker40SDK, extensionSDK: ExtensionSDK ) => {
+    console.log('in createExploreLink')
     try{
         let queryObject: ISqlQueryCreate = {
           connection_name,
@@ -10,8 +12,9 @@ export const createExploreLink: Function = async (tableName: string, updateMessa
         } 
         let queryCreationResponse = await sdk.ok(sdk.create_sql_query(queryObject))
         let slug: string = queryCreationResponse.slug
-        let exploreLink: string = ``
-        updateMessage("Successfully created a table and inserted the data!")
+        let exploreLink: string = `/explore/sql__${slug}/sql_runner_query?fields=sql_runner_query.detail*`
+        extensionSDK.openBrowserWindow(exploreLink,'_blank');
+        updateMessage("Check out the data in the next browser tab ^")
     } catch (error) {
         updateMessage(`There was an error creating the sql explore link: ${error}`)
       }
