@@ -26,9 +26,9 @@ export function Upload(updatefile, updateTableName) {
                     }
                 }
                 updatefile(e.target.result);
-                var dvCSV = document.getElementById("dvCSV");
-                dvCSV.innerHTML = "";
-                dvCSV.appendChild(table);
+                // var dvCSV = document.getElementById("dvCSV");
+                // dvCSV.innerHTML = "";
+                // dvCSV.appendChild(table);
             }
             reader.readAsText(fileUpload.files[0]);
         } else {

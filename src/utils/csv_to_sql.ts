@@ -50,8 +50,8 @@ async function createTable(sql:string, tableName:string, headers: string[], scra
     return sql
 }
 
-function insert(tableName: string, sql: string, rows: string[], columns:string[]) {
-    const start = `INSERT INTO ${tableName} ( ${columns.map(getSQLColumnName).join(', ')} )  VALUES `;
+function insert(tableName: string, sql: string, rows: string[], columns:string[], schema_name: string) {
+    const start = `INSERT INTO ${schema_name}.${tableName} ( ${columns.map(getSQLColumnName).join(', ')} )  VALUES `;
     sql += start;
     rows = rows.filter(
         (x)=> {
@@ -79,10 +79,10 @@ function insert(tableName: string, sql: string, rows: string[], columns:string[]
    return sql
 }
 
-async function insertions(sql, tableName, rowsArray, columns) {
+async function insertions(sql, tableName, rowsArray, columns, scratch_schema) {
     while (rowsArray.length) {
         const thousand: string[] = rowsArray.splice(0, 1000);
-        sql = insert(tableName, sql, thousand, columns);
+        sql = insert(tableName, sql, thousand, columns, scratch_schema);
     }
     return sql
 }
@@ -91,17 +91,17 @@ export async function writeMigration(inputData: string, tableName: string, sdk: 
    
     let scratch_schema_response = await sdk.ok(sdk.connection(connection_name))
     console.log(scratch_schema_response)
-    let scratch_schema = scratch_schema_response.tmp_db_name
+    let scratch_schema = scratch_schema_response.tmp_db_name || 'looker_scratch'
 
     const data: string = inputData
 
     const rowsArray: string[] = data.split("\n")
     const columns: string[] = rowsArray[0].split(",");
     rowsArray.shift()
-
-    let sql: string = "";
-    sql = await createTable(sql, tableName, columns, scratch_schema);
-    sql = await insertions(sql, tableName, rowsArray, columns);
-    console.log(sql)
-    return sql
+    let createDDL: string = ''
+    let insertSQL: string = ''
+    createDDL = await createTable(createDDL, tableName, columns, scratch_schema);
+    insertSQL = await insertions(insertSQL, tableName, rowsArray, columns, scratch_schema);
+    
+    return {createDDL,insertSQL}
 };

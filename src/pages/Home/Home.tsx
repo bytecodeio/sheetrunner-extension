@@ -13,6 +13,7 @@ export const Home: React.FC<HomeProps> = ({ sdk, extensionSDK }) => {
 
   let [inputfile, updatefile] = useState()
   let [sql, updateSQL] = useState()
+  let [ddl, updateDDL] = useState()
   let [connection_name, setConnectionName] = useState("bytecode_looker_bigquery")
   let [all_connections, setAllConnections] = useState<IDBConnection[]>([])
   let [showNav, setShowNav] = useState<boolean>(true)
@@ -28,21 +29,21 @@ export const Home: React.FC<HomeProps> = ({ sdk, extensionSDK }) => {
   useEffect(() => {
     if (inputfile) {
       setMessage("Generating DDL & SQL...")
-      GenerateSQL(inputfile, updateSQL, sdk, connection_name, tableName)
+      GenerateSQL(inputfile, updateDDL, updateSQL, sdk, connection_name, tableName)
     }
   }, [inputfile])
 
   // This Effect will trigger when the parsed SQL is updated, after 'generate sql'
   useEffect(() => {
-    if (sql) {
+    if (sql && ddl) {
       setMessage("Building Table...")
-      ExecuteSQL(sql, setMessage, sdk, connection_name)
+      ExecuteSQL(ddl, sql, setMessage, sdk, connection_name)
     }
-  }, [sql])
+  }, [sql, ddl])
 
   // This Effect will trigger once
   useEffect(() => {
-    if (message === 'Done with SQL execution. Pulling up an explore.') {
+    if (message === 'Done with creation. Pulling up an explore.') {
       setMessage('Almost there, preparing an explore.')
       createExploreLink(tableName, setMessage, connection_name, sdk, extensionSDK)
     }
