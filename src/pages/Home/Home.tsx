@@ -4,7 +4,7 @@ import { ContentContainer } from '../../styles';
 import { Upload } from '../../utils/upload';
 import { GenerateSQL } from '../../utils/generate_sql';
 import { ExecuteSQL } from '../../utils/execute_sql';
-import { Select, Space, SpaceVertical, Button, FadeIn } from '@looker/components'
+import { Select, Space, SpaceVertical, Button, Status } from '@looker/components'
 import { IDBConnection, Looker40SDK } from '@looker/sdk';
 import { createExploreLink } from '../../utils/create_explore_link';
 
@@ -75,9 +75,9 @@ export const Home: React.FC<HomeProps> = ({ sdk, extensionSDK }) => {
           </SpaceVertical>
         </div>
         :
-        <FadeIn>
+        
           <Button onClick={toggleNav}>Show</Button>
-        </FadeIn>
+        
       }
 
       <img src="https://storage.googleapis.com/bytecode-hackathon-2021/SheetRunner_final.png" height="150px" />
@@ -85,7 +85,13 @@ export const Home: React.FC<HomeProps> = ({ sdk, extensionSDK }) => {
       <div id="buttons" >
         <input type="file" id="fileUpload" />
         <input type="button" id="upload" value="Upload" onClick={(e) => { Upload(updatefile); setMessage("Uploading File...") }} />
-        {message}
+        {message ? ( <>
+          {/* style="max-width: 790px; display: block; margin: 0 auto" */}
+            <img src="http://clipartbest.com/cliparts/yio/eKq/yioeKqXpT.gif"/>
+            <Status>{message}</Status>
+          </>
+        )
+          : null}
       </div>
     </Space>
   )
