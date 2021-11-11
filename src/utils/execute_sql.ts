@@ -5,7 +5,7 @@ export async function ExecuteSQL(sql: string, updateMessage: Function, sdk: Look
   let queries = sql.split(";").filter(x => x.length > 0)
 
   let promises: Promise<any>[] = [];
-
+  console.log(8)
   promises = queries.map(async (statement) => { 
      try{ let queryObject: ISqlQueryCreate = {
         connection_name,

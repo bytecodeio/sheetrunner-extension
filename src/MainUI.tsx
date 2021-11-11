@@ -84,7 +84,7 @@ export const MainUI: React.FC<MainUiProps> = ({
         <ContentContainer flex={1}>
           <Switch>
             <Route path={ROUTES.HOME_ROUTE}>
-              <Home sdk={core40SDK} />
+              <Home sdk={core40SDK} extensionSDK={extensionSDK} />
             </Route>
           </Switch>
         </ContentContainer>
