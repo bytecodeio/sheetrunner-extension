@@ -94,7 +94,7 @@ export const MainUI: React.FC<MainUiProps> = ({
 }
 
 export const ContentContainer = styled(FlexItem as any)`
-  background-color: rgb(244, 247, 249);
+  background-color: white;
   overflow-y: auto;
   height: 100%;
 `;
