@@ -8,7 +8,7 @@ export const createExploreLink: Function = async (tableName: string, updateMessa
     try{
         let queryObject: ISqlQueryCreate = {
           connection_name,
-          sql: `Select * from looker_scratch.${tableName}`
+          sql: `Select * from looker_scratch_pdt.${tableName}`
         } 
         let queryCreationResponse = await sdk.ok(sdk.create_sql_query(queryObject))
         let slug: string = queryCreationResponse.slug
