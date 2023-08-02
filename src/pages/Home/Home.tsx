@@ -80,9 +80,8 @@ export const Home: React.FC<HomeProps> = ({ sdk, extensionSDK }) => {
           <label htmlFor="model">Choose a connection:</label>
 
             <Select
-              id='selectConnection'
-              onChange={setConnectionName}
               options={all_connections ? all_connections.map(c => { return { value: c.name } }) : [{ value: 'loading...' }]}
+              onChange={setConnectionName}
             />
 
             <Button type="button" id="sidebarCollapse" className="btn btn-info" onClick={toggleNav}>Hide</Button>
@@ -113,7 +112,7 @@ export const Home: React.FC<HomeProps> = ({ sdk, extensionSDK }) => {
 
         {message ? ( <>
           {/* style="max-width: 790px; display: block; margin: 0 auto" */}
-            <img src="http://clipartbest.com/cliparts/yio/eKq/yioeKqXpT.gif" width="400px" height="300px"/>
+            <img src="https://storage.googleapis.com/bytecode-hackathon-2021/yioeKqXpT.gif" width="400px" height="300px"/>
 
           </>
         )
